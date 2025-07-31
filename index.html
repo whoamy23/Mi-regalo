@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Una Pregunta Para Ti ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      animation: slideIn 1s ease forwards;
+      z-index: 2;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      color: #ff4081;
+      margin-bottom: 1rem;
+    }
+
+    .phrase {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 2rem;
+      min-height: 60px;
+    }
+
+    button {
+      background-color: #ff4081;
+      border: none;
+      padding: 1rem 2rem;
+      color: white;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 5px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e91e63;
+    }
+
+    #respuesta button {
+      padding: 0.7rem 1.5rem;
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall 5s linear infinite;
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% { top: -10%; opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="titulo">Tengo algo que preguntarte ❤️</h1>
+    <div class="phrase" id="phrase">Haz clic abajo para comenzar...</div>
+    <button onclick="showNextPhrase()">Mostrar</button>
+
+    <div id="respuesta" style="display:none; margin-top: 20px;">
+      <button onclick="respuesta('sí')">Sí 😍</button>
+      <button onclick="respuesta('no')">No 😢</button>
+      <button onclick="respuesta('talvez')">Tal vez 🤔</button>
+    </div>
+
+    <div id="final" style="margin-top: 20px; font-weight: bold;"></div>
+  </div>
+
+  <script>
+    // Parámetro de nombre desde URL
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get("para");
+
+    // Título personalizado al inicio
+    if (nombre) {
+      const frasesConNombre = [
+        `Usted, ${nombre}, tengo algo importante que preguntarle ❤️`,
+        `Mi querida ${nombre}, esto es para usted 💌`,
+        `Hola ${nombre}, esta no es cualquier página… es especial como tú 💫`,
+        `Hey ${nombre}, ¿puedo robarte un minuto de tu atención? 😘`
+      ];
+      const frase = frasesConNombre[Math.floor(Math.random() * frasesConNombre.length)];
+      document.getElementById("titulo").innerText = frase;
+    }
+
+    // Frases del cuerpo
+    const phrases = [
+      "¿Quieres ser mi novia? 💖",
+      "¿Quieres ser mi sugar? 🍬",
+      "¿Quieres ser mi amiga con derecho? 😏",
+      "¿Y si te digo que me encantas demasiado? 😍",
+      "¿Te gustaría compartir locuras conmigo? 🌹",
+      "Solo dime que sí... ❤️",
+      "Desde que te vi, supe que algo bonito iba a pasar. 🌷",
+      "No sé si esto es amor, pero me haces sonreír sin motivo. 😊",
+      "¿Tienes nombre o te digo mía? 😏",
+      "¿Aceptas ser la razón por la que me distraigo todo el día? 📱",
+      "¿Podemos hacer travesuras legales juntos? 🤪",
+      "Quiero que seas mi ‘hola’ favorito y mi ‘adiós’ nunca. 👋❤️",
+      "Soy como un gatito, pero con sentimientos. 🐱",
+      "Podríamos hacer cosas que solo el antivirus entendería… 🛡️",
+      "No eres Google, pero tienes todo lo que busco. 😍",
+      "Me gustas más que el WiFi gratis. 📶",
+      "Si fuera emoji, contigo sería el de corazones en los ojos. 😻",
+      "¿Y si dejamos de hablar y empezamos a salir? 💃"
+    ];
+
+    let current = 0;
+    function showNextPhrase() {
+      const el = document.getElementById('phrase');
+      el.innerText = phrases[current];
+      current++;
+      if (current >= phrases.length) {
+        document.getElementById('respuesta').style.display = 'block';
+      }
+    }
+
+    function respuesta(opcion) {
+      let mensaje = '';
+      if(opcion === 'sí') mensaje = nombre ? `¡Sabía que dirías que sí, ${nombre}! 💘` : "¡Sabía que dirías que sí! 💘";
+      else if(opcion === 'no') mensaje = nombre ? `Ouch... ${nombre}, igual te aprecio 💔` : "Ouch... 💔 Pero igual te aprecio mucho.";
+      else mensaje = nombre ? `Bueno ${nombre}, me quedo esperando tu decisión... 😅` : "Bueno, me quedo esperando tu decisión... 😅";
+
+      document.getElementById('final').innerText = mensaje;
+    }
+
+    // Corazones flotantes
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+  </script>
+</body>
+</html>
