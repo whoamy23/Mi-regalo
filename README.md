@@ -8,28 +8,20 @@ https://whoamy23.github.io/Mi-regalo/
 El sitio está diseñado para recibir un nombre mediante un parámetro URL, de esta manera se puede personalizar la dedicatoria sin editar el código.
 
 📌 Estructura del enlace:
-ruby
-Copiar
-Editar
+
 https://whoamy23.github.io/Mi-regalo/?para=Nombre
 ✅ Ejemplos prácticos:
 Para dedicar a Paola:
 
-ruby
-Copiar
-Editar
+
 https://whoamy23.github.io/Mi-regalo/?para=Paola
 Para Carlos Andrés (recuerda usar %20 para los espacios):
 
-perl
-Copiar
-Editar
+
 https://whoamy23.github.io/Mi-regalo/?para=Carlos%20Andrés
 Para un apodo o frase especial:
 
-perl
-Copiar
-Editar
+
 https://whoamy23.github.io/Mi-regalo/?para=Mi%20Reina%20💚
 (Los emojis también funcionan, solo se codifican automáticamente en la URL.)
 
@@ -52,17 +44,13 @@ Haz un fork del repositorio.
 
 Clona el proyecto:
 
-bash
-Copiar
-Editar
+
 git clone https://github.com/tu-usuario/Mi-regalo.git
 Edita index.html si deseas personalizar colores, animaciones o textos.
 
 Sube los cambios:
 
-bash
-Copiar
-Editar
+
 git add .
 git commit -m "Personalización de dedicatoria"
 git push
